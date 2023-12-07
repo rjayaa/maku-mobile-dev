@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "140705579698",
+    "project_id": "pasarnusantarav0",
+    "storage_bucket": "pasarnusantarav0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140705579698:android:f825f6d01d16747a2dffab",
+        "android_client_info": {
+          "package_name": "com.company.pasarnusantarav0"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140705579698-2pko06ql6sphtrh811hg8advt8iq0se6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO2yL_KXkOZtXRyz8w-3NbgObVOJbRmBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140705579698-2pko06ql6sphtrh811hg8advt8iq0se6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "140705579698-8mcdn0k8uj10logcu7cif4r6cs2gkg3v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.company.pasarnusantarav0"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140705579698:android:3d16ff19c724328f2dffab",
+        "android_client_info": {
+          "package_name": "com.project.maku_mobile_based"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140705579698-2pko06ql6sphtrh811hg8advt8iq0se6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO2yL_KXkOZtXRyz8w-3NbgObVOJbRmBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140705579698-2pko06ql6sphtrh811hg8advt8iq0se6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "140705579698-8mcdn0k8uj10logcu7cif4r6cs2gkg3v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.company.pasarnusantarav0"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
