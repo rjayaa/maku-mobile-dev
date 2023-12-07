@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -27,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private Button btnRegister;
+
+    private static final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,15 +108,32 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "User successfully registered!", Toast.LENGTH_LONG).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
 
-
-                    // send verification email
-                    firebaseUser.sendEmailVerification();
-
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     // to prevent user from returning bacck to register activity on pressing back button after registration
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
+                } else {
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        etPassword.setError("Your password is too weak");
+                        etPassword.requestFocus();
+                        progressBar.setVisibility(View.GONE);
+                    }catch(FirebaseAuthInvalidCredentialsException e){
+                        etPassword.setError("Your email is invalid or already in use");
+                        etPassword.requestFocus();
+                        progressBar.setVisibility(View.GONE);
+                    }catch(FirebaseAuthUserCollisionException e){
+                        etPassword.setError("User is already registered with this email, use another email");
+                        etPassword.requestFocus();
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    catch (Exception e) {
+                        Log.e(TAG,e.getMessage());
+                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
                 }
             }
         });
