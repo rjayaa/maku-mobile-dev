@@ -1,13 +1,16 @@
-package com.project.maku_mobile_based.controller;
+package com.project.maku_mobile_based;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 
-import com.project.maku_mobile_based.R;
 
-public class LoginActivityController extends AppCompatActivity {
 
+public class LoginActivity extends AppCompatActivity {
+
+
+    private Button btnViewRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
