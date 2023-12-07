@@ -39,8 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_view);
 
-//        getSupportActionBar().setTitle("Register");
-
         Toast.makeText(RegisterActivity.this, "You can register now", Toast.LENGTH_LONG).show();
         progressBar = findViewById(R.id.progressBar);
         etFullName = findViewById(R.id.txtFullName);
