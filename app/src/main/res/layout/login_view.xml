@@ -1,76 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity" >
+    android:layout_marginTop="230dp"
+    android:layout_marginBottom="100dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    tools:context=".SignInActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:text="Sign In"
+        android:textSize="30dp"
+        android:fontFamily="@font/kokororegular"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:id="@+id/text1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:text="New User?"
+        android:textSize="13sp"
+        android:fontFamily="@font/kokororegular"
+        android:textColor="@color/lightGrey"
+        android:textAllCaps="false"
+        android:layout_below="@id/text1"
+        android:id="@+id/text2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="97dp"
+        android:layout_marginTop="5dp"
+        android:text="Create an Account"
+        android:textSize="13sp"
+        android:fontFamily="@font/kokororegular"
+        android:textColor="@color/blue"
+        android:textAllCaps="false"
+        android:layout_below="@id/text1"
+        android:id="@+id/text3"/>
 
     <LinearLayout
+        android:id="@+id/formContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
+        android:layout_below="@+id/text3"
+        android:layout_centerInParent="true"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="20dp">
 
         <TextView
-            android:id="@+id/lblEmail"
-            android:layout_width="match_parent"
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email :" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/kokororegular"
+            android:text="Email"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtName"
+        <EditText
+            android:id="@+id/etFullName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
-
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="57dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/kokororegular"
+            android:hint="makuapp@gmail.com"
+            android:textSize="15sp"
+            android:inputType="textEmailAddress"/>
 
         <TextView
-            android:id="@+id/lblPassword"
-            android:layout_width="match_parent"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Password :" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/kokororegular"
+            android:text="Password"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtPasswordLayout"
+        <EditText
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-
-            <EditText
-                android:id="@+id/txtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="57dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/kokororegular"
+            android:hint="**********"
+            android:textSize="15sp"
+            android:inputType="textPassword"/>
 
         <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:text="Login" />
-
-        <Button
-            android:id="@+id/btnSignup"
+            android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:background="@drawable/button_shape"
+            android:textColor="@color/white" />
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>
