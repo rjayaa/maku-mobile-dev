@@ -8,144 +8,191 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@color/white"
-        android:padding="15dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
 
         <TextView
             android:id="@+id/lblRegisterForm"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="REGISTER FORM"
-            android:textAlignment="center"
+            android:layout_marginLeft="30dp"
+            android:text="Sign Up"
+            android:textSize="30dp"
+            android:fontFamily="@font/kokororegular"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <TextView
-            android:id="@+id/lblFullName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblRegisterForm"
-            android:layout_marginTop="50dp"
-            android:text="Full Name*"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/txtFullName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblFullName"
-            android:background="@drawable/border"
-            android:hint="Enter your full name"
-            android:inputType="textPersonName"
-            android:padding="6dp"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/lblPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtFullName"
-            android:layout_marginTop="25dp"
-            android:text="Phone Number*"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/txtPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblPhoneNumber"
-            android:background="@drawable/border"
-            android:hint="Enter your phone number"
-            android:inputType="number|phone"
-            android:padding="6dp"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/lblEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtPhoneNumber"
-            android:layout_marginTop="25dp"
-            android:text="Email*"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/txtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblEmail"
-            android:background="@drawable/border"
-            android:hint="Enter your email"
-
-            android:inputType="textEmailAddress"
-            android:padding="6dp"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/lblPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtEmail"
-            android:layout_marginTop="25dp"
-            android:text="Password*"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/txtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblPassword"
-            android:background="@drawable/border"
-            android:hint="Enter your password"
-            android:inputType="textPassword"
-            android:padding="6dp"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/lblConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtPassword"
-            android:layout_marginTop="25dp"
-            android:text="Confirm Password*"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/txtConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lblConfirmPassword"
-            android:background="@drawable/border"
-            android:hint="Enter your password"
-            android:inputType="textPassword"
-            android:padding="6dp"
-            android:textSize="16dp" />
-
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtConfirmPassword"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="70dp"
-            android:text="REGISTER" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:elevation="10dp"
-            android:visibility="gone" />
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:text="Already have an account?"
+            android:textSize="13sp"
+            android:fontFamily="@font/kokororegular"
+            android:textColor="@color/lightGrey"
+            android:textAllCaps="false"
+            android:layout_below="@id/lblRegisterForm"
+            android:id="@+id/text2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="183dp"
+            android:layout_marginTop="5dp"
+            android:text="Sign In"
+            android:textSize="13sp"
+            android:fontFamily="@font/kokororegular"
+            android:textColor="@color/blue"
+            android:textAllCaps="false"
+            android:layout_below="@id/lblRegisterForm"
+            android:id="@+id/text3"/>
+
+        <LinearLayout
+            android:id="@+id/formContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text2"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/lblFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kokororegular"
+                android:text="Full Name*"
+                android:textColor="@color/black"
+                android:textSize="15sp"  />
+
+            <EditText
+                android:id="@+id/txtFullName"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/kokororegular"
+                android:hint="Enter Your Full Name"
+                android:inputType="textPersonName"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kokororegular"
+                android:text="Phone Number*"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/kokororegular"
+                android:hint="Enter Your Phone Number"
+                android:inputType="number|phone"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kokororegular"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/kokororegular"
+                android:hint="Enter Your Email"
+                android:inputType="textEmailAddress"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kokororegular"
+                android:text="Password"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/kokororegular"
+                android:hint="Enter Your Password"
+                android:inputType="textPassword"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblConfirmPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kokororegular"
+                android:text="Confirm Password"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/kokororegular"
+                android:hint="Enter Your Password"
+                android:inputType="textPassword"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/button_shape"
+                android:text="Register"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:elevation="10dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
 
     </RelativeLayout>

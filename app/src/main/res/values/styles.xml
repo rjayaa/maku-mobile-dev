@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Makumobilebased" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorAccent">@color/lightGrey</item>
+        <item name="colorSecondary">@color/blue</item>
+    </style>
+
+</resources>
