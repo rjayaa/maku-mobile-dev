@@ -23,25 +23,25 @@
         android:text="Register"
         android:textAllCaps="false"
         android:textSize="17sp"
-        android:background="@drawable/button_shape"
-        android:textColor="@color/white"
+        android:background="@drawable/button_stroke_shape"
+        android:textColor="@color/primaryColor"
         android:layout_centerHorizontal="true"
-        android:id="@+id/button1"
+        android:id="@+id/RegisterButton"
         />
 
     <Button
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/RegisterButton"
         android:width="300dp"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="17sp"
-        android:background="@drawable/button_stroke_shape"
-        android:textColor="@color/primaryColor"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:id="@+id/button2"
+        android:id="@+id/SignInButton"
         />
 
 </RelativeLayout>
