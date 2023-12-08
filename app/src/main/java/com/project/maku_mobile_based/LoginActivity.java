@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_view);
         getSupportActionBar().hide();
-
+        authProfile = FirebaseAuth.getInstance();
         etEmail = findViewById(R.id.txtEmail);
         etPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -44,61 +44,55 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String txtEmail = etEmail.getText().toString();
-                String txtPassword = etPassword.getText().toString();
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
 
-                if (TextUtils.isEmpty(txtEmail)) {
+                if (TextUtils.isEmpty(email)) {
                     etEmail.setError("Email is required");
                     etEmail.requestFocus();
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(txtEmail).matches()) {
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     etEmail.setError("Email is not valid");
                     etEmail.requestFocus();
-                } else if (TextUtils.isEmpty(txtPassword)) {
+                } else if (TextUtils.isEmpty(password)) {
                     etPassword.setError("Password is required");
                     etPassword.requestFocus();
-                }
-                loginUser(txtEmail, txtPassword);
-            }
-        });
-
-
-    }
-
-    private void loginUser(String txtEmail, String txtPassword) {
-        authProfile.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "You are logged in!", Toast.LENGTH_SHORT).show();
-
-
                 } else {
-                    try {
-                        throw task.getException();
-                    } catch (FirebaseAuthInvalidUserException e) {
-                        etEmail.setError("User is not exist or user is not valid, please try again");
-                        etEmail.requestFocus();
-                    } catch (FirebaseAuthInvalidCredentialsException e) {
-                        etEmail.setError("User is not exist or user is not valid, please try again");
-                        etEmail.requestFocus();
-                    } catch (Exception e) {
-                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    loginUser(email, password);
 
                 }
+
             }
         });
+
+
+    }
+
+    private void loginUser(String email, String password) {
+        authProfile.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "You are logged in!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this,MenuActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthInvalidUserException e) {
+                                etEmail.setError("User is not exist or user is not valid, please try again");
+                                etEmail.requestFocus();
+                            } catch (FirebaseAuthInvalidCredentialsException e) {
+                                etEmail.setError("User is not exist or user is not valid, please try again");
+                                etEmail.requestFocus();
+                            } catch (Exception e) {
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
     }
 
 
-    // check if user already logged in
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (authProfile.getCurrentUser() != null) {
-            Toast.makeText(LoginActivity.this, "Already Logged In", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, MenuActivity.class));
-            finish();
-        }
-    }
 }

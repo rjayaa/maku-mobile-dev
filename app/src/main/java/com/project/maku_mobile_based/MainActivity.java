@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button SignInButton, SignUpButton;
-
+    private Button SignInButton, SignUpButton;
+    private FirebaseAuth authProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,4 +40,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+//        @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if (authProfile.getCurrentUser() != null) {
+//            Toast.makeText(MainActivity.this, "Already Logged In", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(MainActivity.this, MenuActivity.class));
+//            finish();
+//        }
+//    }
 }

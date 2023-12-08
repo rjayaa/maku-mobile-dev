@@ -3,6 +3,7 @@ package com.project.maku_mobile_based.model;
 public class User {
     private String fullName, phoneNumber, email;
 
+    public User(){};
     public User(String fullName, String phoneNumber, String email) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
