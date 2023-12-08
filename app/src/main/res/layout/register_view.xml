@@ -50,7 +50,7 @@
             android:textColor="@color/blue"
             android:textAllCaps="false"
             android:layout_below="@id/lblRegisterForm"
-            android:id="@+id/text3"/>
+            android:id="@+id/txtSignIn"/>
 
         <LinearLayout
             android:id="@+id/formContainer"
@@ -183,14 +183,7 @@
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:elevation="10dp"
-                android:visibility="gone" />
+
 
         </LinearLayout>
 

@@ -45,13 +45,13 @@
         android:textColor="@color/blue"
         android:textAllCaps="false"
         android:layout_below="@id/text1"
-        android:id="@+id/text3"/>
+        android:id="@+id/txtRegisterView"/>
 
     <LinearLayout
         android:id="@+id/formContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text3"
+        android:layout_below="@+id/txtRegisterView"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:padding="20dp">
@@ -68,7 +68,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/etFullName"
+            android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:layout_marginLeft="6dp"
@@ -90,7 +90,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:layout_marginLeft="6dp"
@@ -101,12 +101,12 @@
             android:inputType="textPassword"/>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:text="Register"
+            android:text="Login"
             android:textAllCaps="false"
             android:textSize="17sp"
             android:background="@drawable/button_shape"
