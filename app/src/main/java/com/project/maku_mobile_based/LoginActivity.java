@@ -24,10 +24,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+    // component
     private Button btnLogin;
     private TextView tvToRegister;
     private EditText etEmail, etPassword;
-
     private ProgressBar pb;
     private FirebaseAuth authProfile;
 
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "You are logged in!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this,MenuActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
@@ -94,5 +95,17 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (authProfile.getCurrentUser() != null) {
+            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
 }

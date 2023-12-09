@@ -123,13 +123,13 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    // Register User using the credentials given
+
     private void registerUser(String txtFullName, String txtPhoneNumber, String txtEmail, String txtPassword) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        // create user profile
+        // create user
         auth.createUserWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
