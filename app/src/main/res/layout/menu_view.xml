@@ -6,25 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <TextView
-        android:id="@+id/textViewFoodName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nama Makanan"
-        android:textSize="18sp"
-        android:textStyle="bold"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="8dp"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textViewPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Harga"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/textViewFoodName"
-        app:layout_constraintTop_toBottomOf="@id/textViewFoodName"
-        android:padding="4dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtGreetings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Tenants"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"
+                    app:layout_constraintBottom_toTopOf="@id/textView"
+                    app:layout_constraintEnd_toStartOf="@id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Kampus Binus Alam Sutera"
+                    app:layout_constraintEnd_toStartOf="@id/imageView"
+                    app:layout_constraintStart_toStartOf="@id/txtGreetings"
+                    app:layout_constraintTop_toBottomOf="@id/txtGreetings" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logobinus"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/textView"
+                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- EditText for Search Bar -->
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search for food..."
+                android:inputType="text"
+                android:layout_margin="16dp"
+                android:drawablePadding="10dp"
+                android:padding="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tenantsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
