@@ -2,18 +2,16 @@ package com.project.maku_mobile_based.model;
 
 public class Food {
 
-    String foodName,foodTenants,foodUrl;
-    Integer foodPrice;
+   String foodName,foodUrlImage,foodPrice;
 
-//    Constructor for firebase
-    Food(){
 
-    }
+   public Food(){
 
-    public Food(String foodName, String foodTenants, String foodUrl, Integer foodPrice) {
+   }
+
+    public Food(String foodName, String foodUrlImage, String foodPrice) {
         this.foodName = foodName;
-        this.foodTenants = foodTenants;
-        this.foodUrl = foodUrl;
+        this.foodUrlImage = foodUrlImage;
         this.foodPrice = foodPrice;
     }
 
@@ -25,27 +23,19 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public String getFoodTenants() {
-        return foodTenants;
+    public String getFoodUrlImage() {
+        return foodUrlImage;
     }
 
-    public void setFoodTenants(String foodTenants) {
-        this.foodTenants = foodTenants;
+    public void setFoodUrlImage(String foodUrlImage) {
+        this.foodUrlImage = foodUrlImage;
     }
 
-    public String getFoodUrl() {
-        return foodUrl;
-    }
-
-    public void setFoodUrl(String foodUrl) {
-        this.foodUrl = foodUrl;
-    }
-
-    public Integer getFoodPrice() {
+    public String getFoodPrice() {
         return foodPrice;
     }
 
-    public void setFoodPrice(Integer foodPrice) {
+    public void setFoodPrice(String foodPrice) {
         this.foodPrice = foodPrice;
     }
 }

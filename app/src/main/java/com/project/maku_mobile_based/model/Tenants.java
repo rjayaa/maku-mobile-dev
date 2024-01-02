@@ -2,14 +2,15 @@ package com.project.maku_mobile_based.model;
 
 public class Tenants {
 
-    String tenantsCategory, tenantsName, tenantsUrlImage;
-
+    String tenantsCategory, tenantsDescription,tenantsName, tenantsUrlImage;
 
     public Tenants(){
 
     }
-    public Tenants(String tenantsCategory, String tenantsName, String tenantsUrlImage) {
+
+    public Tenants(String tenantsCategory, String tenantsDescription, String tenantsName, String tenantsUrlImage) {
         this.tenantsCategory = tenantsCategory;
+        this.tenantsDescription = tenantsDescription;
         this.tenantsName = tenantsName;
         this.tenantsUrlImage = tenantsUrlImage;
     }
@@ -20,6 +21,14 @@ public class Tenants {
 
     public void setTenantsCategory(String tenantsCategory) {
         this.tenantsCategory = tenantsCategory;
+    }
+
+    public String getTenantsDescription() {
+        return tenantsDescription;
+    }
+
+    public void setTenantsDescription(String tenantsDescription) {
+        this.tenantsDescription = tenantsDescription;
     }
 
     public String getTenantsName() {

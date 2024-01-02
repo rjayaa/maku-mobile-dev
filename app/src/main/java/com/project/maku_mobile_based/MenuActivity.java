@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,10 +22,10 @@ import android.util.Log;
 import java.util.ArrayList;
 
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity implements RecyclerViewInterface{
     RecyclerView recyclerView;
     private DatabaseReference database;
-    private RecyclerAdapter recyclerAdapter;
+    private TenantRecycleAdapter tenantRecycleAdapter;
     private ArrayList<Tenants> tenantlist;
     private Context tcontext;
 
@@ -32,7 +33,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_view);
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         recyclerView = findViewById(R.id.tenantsList);
 
 
@@ -48,10 +51,10 @@ public class MenuActivity extends AppCompatActivity {
 
 
         // get data from firebase;
-        GetDatFromFirebase();
+        GetDataFromFirebase();
     }
 
-    private void GetDatFromFirebase() {
+    private void GetDataFromFirebase() {
         Query query = database.child("tenants");
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,14 +65,15 @@ public class MenuActivity extends AppCompatActivity {
                     tenants.setTenantsUrlImage(snapshot1.child("tenantsUrlImage").getValue().toString());
                     tenants.setTenantsName(snapshot1.child("tenantsName").getValue().toString());
                     tenants.setTenantsCategory(snapshot1.child("tenantsCategory").getValue().toString());
+                    tenants.setTenantsDescription(snapshot1.child("tenantsDescription").getValue().toString());
 
                     tenantlist.add(tenants);
                     Log.d("FirebaseData", "Tenant added: " + tenants.getTenantsName());
                 }
 
-                recyclerAdapter = new RecyclerAdapter(getApplicationContext(), tenantlist);
-                recyclerView.setAdapter(recyclerAdapter);
-                recyclerAdapter.notifyDataSetChanged();
+                tenantRecycleAdapter = new TenantRecycleAdapter(getApplicationContext(), tenantlist, MenuActivity.this);
+                recyclerView.setAdapter(tenantRecycleAdapter);
+                tenantRecycleAdapter.notifyDataSetChanged();
             }
 
 
@@ -85,11 +89,22 @@ public class MenuActivity extends AppCompatActivity {
         if (tenantlist != null) {
             tenantlist.clear();
 
-            if(recyclerAdapter != null){
-                recyclerAdapter.notifyDataSetChanged();
+            if(tenantRecycleAdapter != null){
+                tenantRecycleAdapter.notifyDataSetChanged();
             }
         }
 
         tenantlist = new ArrayList<>();
+    }
+
+    @Override
+    public void onItemClick(int pos) {
+        Intent intent = new Intent(MenuActivity.this,TenantFoodActivity.class);
+
+
+        intent.putExtra("TenantName",tenantlist.get(pos).getTenantsName());
+        intent.putExtra("IMAGE",tenantlist.get(pos).getTenantsUrlImage());
+        intent.putExtra("DESCRIPTION", tenantlist.get(pos).getTenantsDescription());
+        startActivity(intent);
     }
 }
