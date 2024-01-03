@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,9 +31,11 @@ public class TenantFoodActivity extends AppCompatActivity {
     private FoodReycleAdapter foodReycleAdapter;
     private ArrayList<Food> foodList;
     private Context context;
+    private Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tenant_food_view);
         if (getSupportActionBar() != null) {
@@ -43,6 +48,7 @@ public class TenantFoodActivity extends AppCompatActivity {
         TextView nameText = findViewById(R.id.txtTenantName);
         TextView descriptionText = findViewById(R.id.txtDescription);
         ImageView imageView = findViewById(R.id.tenantimage);
+        backBtn = findViewById(R.id.backBtn);
 
         nameText.setText(name);
         descriptionText.setText(description);
@@ -56,6 +62,15 @@ public class TenantFoodActivity extends AppCompatActivity {
         foodList = new ArrayList<>();
         clearAll();
         getDataFromFirebase(name);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TenantFoodActivity.this, MenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void getDataFromFirebase(String tenantName) {
