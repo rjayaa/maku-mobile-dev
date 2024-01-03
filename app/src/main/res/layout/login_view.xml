@@ -1,118 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="230dp"
-    android:layout_marginBottom="100dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+    android:padding="20dp"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:text="Sign In"
-        android:textSize="30dp"
-        android:fontFamily="@font/kokororegular"
-        android:textColor="@color/black"
-        android:textAllCaps="false"
-        android:id="@+id/text1"/>
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/baseline_arrow_back_24"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/backBtn"
+        android:src="@drawable/maku_logo"/>
 
     <TextView
+        android:id="@+id/SignInBadge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
-        android:text="New User?"
+        android:layout_below="@id/logo"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/SignInBadge"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/SignInText"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/SignInText"
         android:textSize="13sp"
-        android:fontFamily="@font/kokororegular"
         android:textColor="@color/lightGrey"
         android:textAllCaps="false"
-        android:layout_below="@id/text1"
-        android:id="@+id/text2"/>
+        android:layout_below="@+id/SignInBadge"/>
 
     <TextView
+        android:id="@+id/txtSignUpView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="97dp"
-        android:layout_marginTop="5dp"
-        android:text="Create an Account"
+        android:layout_height="15dp"
+        android:layout_marginStart="75dp"
+        android:text="@string/ToRegister"
         android:textSize="13sp"
-        android:fontFamily="@font/kokororegular"
         android:textColor="@color/blue"
         android:textAllCaps="false"
-        android:layout_below="@id/text1"
-        android:id="@+id/txtRegisterView"/>
+        android:layout_below="@+id/SignInBadge"/>
 
     <LinearLayout
-        android:id="@+id/formContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtRegisterView"
-        android:layout_centerInParent="true"
+        android:layout_below="@id/SignInText"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp">
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/kokororegular"
-            android:text="Email"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="15sp"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:text="@string/HeadEmail"/>
 
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/kokororegular"
-            android:hint="makuapp@gmail.com"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:textSize="15sp"
-            android:inputType="textEmailAddress"/>
+            android:hint="@string/HintEmail"/>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/kokororegular"
-            android:text="Password"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="15sp"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:text="@string/HeadPassword"/>
 
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/kokororegular"
-            android:hint="**********"
-            android:textSize="15sp"
-            android:inputType="textPassword"/>
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:text="Login"
-            android:textAllCaps="false"
-            android:textSize="17sp"
-            android:background="@drawable/button_shape"
-            android:textColor="@color/white" />
-
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="15sp"
+            android:hint="@string/HintPassword"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/loginBtnTxt"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_shape"/>
 
-</RelativeLayout>
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>

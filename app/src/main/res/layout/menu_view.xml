@@ -1,95 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="25dp"
     tools:context=".MenuActivity">
+
+    <TextView
+        android:id="@+id/txtGreetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tenants"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtGreetings"
+        android:text="Kampus Binus Alam Sutera"
+        android:textColor="@color/black"
+        android:textSize="12sp"/>
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="57dp"
+        android:src="@drawable/logobinus"
+        android:padding="5dp"
+        android:layout_alignParentEnd="true"/>
+
+    <SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:queryHint="Search for Ibu Kantin..."
+        android:iconifiedByDefault="false"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/searchview_background" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/sort_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_bar"
+            android:textColor="@color/black"
+            android:text="Sort by: "
+            android:textSize="12dp"/>
+
+        <Spinner
+            android:id="@+id/customSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_bar"
+            android:entries="@array/SpinnerSort"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:layout_below="@+id/sort_item">
 
-        <LinearLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tenantsList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/txtGreetings"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Tenants"
-                    android:textColor="@color/black"
-                    android:textSize="28dp"
-                    app:layout_constraintBottom_toTopOf="@id/textView"
-                    app:layout_constraintEnd_toStartOf="@id/imageView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Kampus Binus Alam Sutera"
-                    app:layout_constraintEnd_toStartOf="@id/imageView"
-                    app:layout_constraintStart_toStartOf="@id/txtGreetings"
-                    app:layout_constraintTop_toBottomOf="@id/txtGreetings" />
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/logobinus"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/textView"
-                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/end_guideline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- EditText for Search Bar -->
-            <EditText
-                android:id="@+id/search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Search for food..."
-                android:inputType="text"
-                android:layout_margin="16dp"
-                android:drawablePadding="10dp"
-                android:padding="12dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tenantsList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-
-        </LinearLayout>
+            android:layout_height="match_parent" />
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>

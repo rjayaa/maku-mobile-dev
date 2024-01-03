@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etFullName, etPhoneNumber, etEmail, etPassword, etConfirmPassword;
-    private Button btnRegister;
+    private Button btnRegister, btnBack;
 
     private TextView txtSignInTextView;
     private static final String TAG = "RegisterActivity";
@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_view);
         getSupportActionBar().hide();
 
-
+        btnBack = findViewById(R.id.backBtn);
 
         etFullName = findViewById(R.id.txtFullName);
         etPhoneNumber = findViewById(R.id.txtPhoneNumber);
@@ -59,6 +59,14 @@ public class RegisterActivity extends AppCompatActivity {
         txtSignInTextView = findViewById(R.id.txtSignIn);
         btnRegister = findViewById(R.id.btnRegister);
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // move to login activity
         txtSignInTextView.setOnClickListener(new View.OnClickListener() {

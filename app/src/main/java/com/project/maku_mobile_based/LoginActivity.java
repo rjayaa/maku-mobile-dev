@@ -26,11 +26,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
     // component
-    private Button btnLogin;
+    private Button btnLogin, backBtn;
     private TextView tvToRegister;
     private EditText etEmail, etPassword;
     private ProgressBar pb;
     private FirebaseAuth authProfile;
+
+    private TextView txtSignUpTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,27 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.txtEmail);
         etPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        backBtn = findViewById(R.id.backBtn);
+        txtSignUpTextView = findViewById(R.id.txtSignUpView);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        // move to login activity
+        txtSignUpTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

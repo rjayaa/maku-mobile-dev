@@ -18,6 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.project.maku_mobile_based.model.Tenants;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,11 @@ public class MenuActivity extends AppCompatActivity implements RecyclerViewInter
             getSupportActionBar().hide();
         }
         recyclerView = findViewById(R.id.tenantsList);
+
+        Spinner customSpinner = findViewById(R.id.customSpinner);
+
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.SpinnerSort, R.layout.custom_spinner);
+        customSpinner.setAdapter(adapter);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

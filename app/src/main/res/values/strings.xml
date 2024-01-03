@@ -3,10 +3,38 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="SignUp">Create a new account</string>
+    <string name="SignIn">Log In</string>
+    <string name="SignInBadge">Sign In</string>
+    <string name="SignInText">New User?</string>
+    <string name="ToRegister">Create an Account\n</string>
+    <string name="HeadEmail">Email</string>
+    <string name="HintEmail">youremail@gmail.com</string>
+    <string name="HeadPassword">Password</string>
+    <string name="HintPassword">**********</string>
+    <string name="SignUpBadge">Sign Up</string>
+    <string name="SignUpText">Already have an account?</string>
+    <string name="ToSignIn">Sign In</string>
+    <string name="HeadFullName">Full Name*</string>
+    <string name="HintFullName">Enter your full name</string>
+    <string name="HeadPhoneNumber">Phone Number*</string>
+    <string name="HintPhoneNumber">Enter your phone number</string>
+    <string name="HeadEmail1">Email*</string>
+    <string name="HintEmail1">Enter your email</string>
+    <string name="HeadPassword1">Password*</string>
+    <string name="HeadConfirmPassword">Confirm Password*</string>
+    <string name="HintConfirmPassword">**********</string>
+    <string name="RegistBtnTxt">Register</string>
+    <string name="loginBtnTxt">Login</string>
+
+    <string-array name="SpinnerSort">
+        <item>Rating</item>
+        <item>Harga</item>
+        <item>Jarak</item>
+    </string-array>
+
 </resources>
