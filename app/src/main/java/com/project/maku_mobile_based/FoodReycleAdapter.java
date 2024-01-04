@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,13 +19,15 @@ import com.project.maku_mobile_based.model.Food;
 
 import org.w3c.dom.Text;
 
+
 public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Food> foodlist;
-
-    public FoodReycleAdapter(Context context, ArrayList<Food> foodlist) {
+    private OnChangeQuantity listener;
+    public FoodReycleAdapter(Context context, ArrayList<Food> foodlist, OnChangeQuantity listener) {
         this.context = context;
         this.foodlist = foodlist;
+        this.listener = listener;
     }
 
     @NonNull
@@ -47,15 +50,41 @@ public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        Button btnDecrease, btnIncrease;
 
         ImageView imageView;
-        TextView textfoodname, textfoodprice;
+        TextView textfoodname, textfoodprice, textQuantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            btnDecrease = itemView.findViewById(R.id.buttonDecrease);
+            btnIncrease = itemView.findViewById(R.id.buttonIncrease);
+            textQuantity =itemView.findViewById(R.id.txtQuantity);
             textfoodname = itemView.findViewById(R.id.txtfoodname);
             textfoodprice = itemView.findViewById(R.id.txtfoodprice);
             imageView = itemView.findViewById(R.id.imageFood);
+
+            btnIncrease.setOnClickListener(v->{
+                int position = getAdapterPosition();
+                Food food = foodlist.get(position);
+                food.setQuantity(food.getQuantity()+1);
+                textQuantity.setText(String.valueOf(food.getQuantity()));
+                listener.onQuantityChanged();
+
+            });
+
+            btnDecrease.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                Food food = foodlist.get(position);
+                if (food.getQuantity() > 1) {
+                    food.setQuantity(food.getQuantity() - 1);
+                    textQuantity.setText(String.valueOf(food.getQuantity()));
+                    listener.onQuantityChanged();
+
+                }
+            });
+
+
 
         }
     }

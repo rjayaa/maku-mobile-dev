@@ -25,13 +25,13 @@ import com.project.maku_mobile_based.model.Food;
 
 import java.util.ArrayList;
 
-public class TenantFoodActivity extends AppCompatActivity {
+public class TenantFoodActivity extends AppCompatActivity implements OnChangeQuantity {
     RecyclerView recyclerView;
     private DatabaseReference database;
     private FoodReycleAdapter foodReycleAdapter;
     private ArrayList<Food> foodList;
     private Context context;
-    private Button backBtn;
+    private Button backBtn,btnShowCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,8 @@ public class TenantFoodActivity extends AppCompatActivity {
         TextView descriptionText = findViewById(R.id.txtDescription);
         ImageView imageView = findViewById(R.id.tenantimage);
         backBtn = findViewById(R.id.backBtn);
+        btnShowCart = findViewById(R.id.btnShowCart);
+        foodReycleAdapter = new FoodReycleAdapter(getApplicationContext(),foodList,this);
 
         nameText.setText(name);
         descriptionText.setText(description);
@@ -89,8 +91,8 @@ public class TenantFoodActivity extends AppCompatActivity {
                         foodList.add(food);
                     }
                 }
-                // ... setup adapter ...
-                foodReycleAdapter = new FoodReycleAdapter(getApplicationContext(), foodList);
+
+                foodReycleAdapter = new FoodReycleAdapter(getApplicationContext(), foodList,TenantFoodActivity.this);
                 recyclerView.setAdapter(foodReycleAdapter);
                 foodReycleAdapter.notifyDataSetChanged();
             }
@@ -112,5 +114,23 @@ public class TenantFoodActivity extends AppCompatActivity {
         }
 
         foodList = new ArrayList<>();
+    }
+
+    @Override
+    public void onQuantityChanged() {
+        if (isAnyFoodQuantityMoreThanZero()) {
+            btnShowCart.setVisibility(View.VISIBLE);
+        } else {
+            btnShowCart.setVisibility(View.GONE);
+        }
+    }
+
+    private boolean isAnyFoodQuantityMoreThanZero() {
+        for (Food food : foodList) {
+            if (food.getQuantity() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

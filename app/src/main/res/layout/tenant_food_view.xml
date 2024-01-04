@@ -11,24 +11,27 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_margin="20dp"
-        android:background="@drawable/baseline_arrow_back_24"/>
+        android:background="@drawable/baseline_arrow_back_24" />
+
     <ImageView
         android:id="@+id/tenantimage"
         android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:id="@+id/txtTenantName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tenantimage"
-        android:paddingTop="10dp"
-        android:textSize="21dp"
-        android:textStyle="bold"
         android:paddingStart="20dp"
+        android:paddingTop="10dp"
         android:paddingEnd="20dp"
+        android:text="Nama Tenant"
         android:textColor="@color/black"
-        android:text="Nama Tenant"/>
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
@@ -36,8 +39,8 @@
         android:layout_below="@id/txtTenantName"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:textColor="@color/black"
-        android:text="Desc Tenant"/>
+        android:text="Desc Tenant"
+        android:textColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclefood"
@@ -49,5 +52,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTenantName" />
+
+    <Button
+        android:id="@+id/btnShowCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Cart"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

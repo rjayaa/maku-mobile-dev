@@ -16,23 +16,23 @@ import com.project.maku_mobile_based.model.Tenants;
 import java.util.ArrayList;
 
 public class TenantRecycleAdapter extends RecyclerView.Adapter<TenantRecycleAdapter.ViewHolder> {
-    private final RecyclerViewInterface recyclerViewInterface;
+    private final TenantRecyclerViewInterface tenantRecyclerViewInterface;
 
     private static final String Tag = "RecyclerView";
     private Context tContext ;
     private ArrayList<Tenants> tenantlist;
 
-    public TenantRecycleAdapter(Context tContext, ArrayList<Tenants> tenantlist, RecyclerViewInterface recyclerViewInterface) {
+    public TenantRecycleAdapter(Context tContext, ArrayList<Tenants> tenantlist, TenantRecyclerViewInterface tenantRecyclerViewInterface) {
         this.tContext = tContext;
         this.tenantlist = tenantlist;
-        this.recyclerViewInterface = recyclerViewInterface;
+        this.tenantRecyclerViewInterface = tenantRecyclerViewInterface;
     }
 
     @NonNull
     @Override
     public TenantRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tenants_item,parent,false);
-        return  new ViewHolder(view,recyclerViewInterface);
+        return  new ViewHolder(view, tenantRecyclerViewInterface);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class TenantRecycleAdapter extends RecyclerView.Adapter<TenantRecycleAdap
         ImageView imageView;
         TextView textName, textCategory, textDescription;
 
-        public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
+        public ViewHolder(@NonNull View itemView, TenantRecyclerViewInterface tenantRecyclerViewInterface) {
             super(itemView);
             textCategory = itemView.findViewById(R.id.txtcategory);
             textName = itemView.findViewById(R.id.txtname);
@@ -63,11 +63,11 @@ public class TenantRecycleAdapter extends RecyclerView.Adapter<TenantRecycleAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(recyclerViewInterface != null){
+                    if(tenantRecyclerViewInterface != null){
                         int pos = getAdapterPosition();
 
                         if(pos != RecyclerView.NO_POSITION){
-                            recyclerViewInterface.onItemClick(pos);
+                            tenantRecyclerViewInterface.onItemClick(pos);
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 package com.project.maku_mobile_based;
 
-public interface RecyclerViewInterface {
+public interface TenantRecyclerViewInterface {
     void onItemClick(int post);
 }

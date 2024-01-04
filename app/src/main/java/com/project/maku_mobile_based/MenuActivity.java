@@ -24,7 +24,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 
-public class MenuActivity extends AppCompatActivity implements RecyclerViewInterface{
+public class MenuActivity extends AppCompatActivity implements TenantRecyclerViewInterface {
     RecyclerView recyclerView;
     private DatabaseReference database;
     private TenantRecycleAdapter tenantRecycleAdapter;

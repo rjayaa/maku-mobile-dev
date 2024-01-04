@@ -2,7 +2,8 @@ package com.project.maku_mobile_based.model;
 
 public class Food {
 
-   String foodName,foodUrlImage,foodPrice;
+   private String foodName,foodUrlImage,foodPrice;
+   private int quantity = 1;
 
 
    public Food(){
@@ -13,6 +14,14 @@ public class Food {
         this.foodName = foodName;
         this.foodUrlImage = foodUrlImage;
         this.foodPrice = foodPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getFoodName() {
