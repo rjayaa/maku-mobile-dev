@@ -123,7 +123,7 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
     public void onQuantityChanged() {
         if (isAnyFoodQuantityMoreThanZero()) {
             btnShowCart.setVisibility(View.VISIBLE);
-        } else {
+        } else if(!isAnyFoodQuantityMoreThanZero()) {
             btnShowCart.setVisibility(View.GONE);
         }
     }

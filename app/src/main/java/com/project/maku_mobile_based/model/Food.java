@@ -3,7 +3,7 @@ package com.project.maku_mobile_based.model;
 public class Food {
 
    private String foodName,foodUrlImage,foodPrice;
-   private int quantity = 1;
+   private int quantity = 0;
 
 
    public Food(){

@@ -74,11 +74,10 @@ public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.Vi
             btnDecrease.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 Food food = foodlist.get(position);
-                if (food.getQuantity() > 1) {
+                if (food.getQuantity() > 0) {
                     food.setQuantity(food.getQuantity() - 1);
                     textQuantity.setText(String.valueOf(food.getQuantity()));
                     listener.onQuantityChanged();
-
                 }
             });
 
