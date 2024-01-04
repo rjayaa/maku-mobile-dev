@@ -1,4 +1,4 @@
-package com.project.maku_mobile_based;
+package com.project.maku_mobile_based.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.project.maku_mobile_based.Adapter.FoodReycleAdapter;
+import com.project.maku_mobile_based.OnChangeQuantity;
+import com.project.maku_mobile_based.R;
 import com.project.maku_mobile_based.model.Food;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.project.maku_mobile_based;
+package com.project.maku_mobile_based.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.project.maku_mobile_based.R;
 
 public class MainActivity extends AppCompatActivity {
 

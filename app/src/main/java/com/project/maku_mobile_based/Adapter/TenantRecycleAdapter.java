@@ -1,4 +1,4 @@
-package com.project.maku_mobile_based;
+package com.project.maku_mobile_based.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.project.maku_mobile_based.R;
+import com.project.maku_mobile_based.TenantRecyclerViewInterface;
 import com.project.maku_mobile_based.model.Tenants;
 
 import java.util.ArrayList;

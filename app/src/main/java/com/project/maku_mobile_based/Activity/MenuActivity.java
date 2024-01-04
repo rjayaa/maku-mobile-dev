@@ -1,4 +1,4 @@
-package com.project.maku_mobile_based;
+package com.project.maku_mobile_based.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import com.project.maku_mobile_based.Adapter.TenantRecycleAdapter;
+import com.project.maku_mobile_based.R;
+import com.project.maku_mobile_based.TenantRecyclerViewInterface;
 import com.project.maku_mobile_based.model.Tenants;
 import android.util.Log;
 import android.widget.ArrayAdapter;

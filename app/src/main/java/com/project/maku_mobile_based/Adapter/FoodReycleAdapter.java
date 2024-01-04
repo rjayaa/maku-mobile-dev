@@ -1,7 +1,6 @@
-package com.project.maku_mobile_based;
+package com.project.maku_mobile_based.Adapter;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,9 @@ import com.bumptech.glide.Glide;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.project.maku_mobile_based.OnChangeQuantity;
+import com.project.maku_mobile_based.R;
 import com.project.maku_mobile_based.model.Food;
-
-import org.w3c.dom.Text;
 
 
 public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.ViewHolder> {
