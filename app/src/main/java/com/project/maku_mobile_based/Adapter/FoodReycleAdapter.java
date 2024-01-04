@@ -38,6 +38,7 @@ public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull FoodReycleAdapter.ViewHolder holder, int position) {
         holder.textfoodname.setText(foodlist.get(position).getFoodName().toString());
+        holder.textfooddesc.setText(foodlist.get(position).getFoodDesc().toString());
         holder.textfoodprice.setText(foodlist.get(position).getFoodPrice().toString());
         Glide.with(context).load(foodlist.get(position).getFoodUrlImage()).into(holder.imageView);
     }
@@ -51,7 +52,7 @@ public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.Vi
         Button btnDecrease, btnIncrease;
 
         ImageView imageView;
-        TextView textfoodname, textfoodprice, textQuantity;
+        TextView textfoodname, textfooddesc, textfoodprice, textQuantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +60,7 @@ public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.Vi
             btnIncrease = itemView.findViewById(R.id.buttonIncrease);
             textQuantity =itemView.findViewById(R.id.txtQuantity);
             textfoodname = itemView.findViewById(R.id.txtfoodname);
+            textfooddesc = itemView.findViewById(R.id.txtfooddesc);
             textfoodprice = itemView.findViewById(R.id.txtfoodprice);
             imageView = itemView.findViewById(R.id.imageFood);
 

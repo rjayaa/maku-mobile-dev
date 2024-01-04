@@ -34,7 +34,7 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
     private FoodReycleAdapter foodReycleAdapter;
     private ArrayList<Food> foodList;
     private Context context;
-    private Button backBtn,btnShowCart;
+    private Button backBtn, btnShowCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +90,7 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
                         Log.d("FirebaseData", "Food: " + foodSnapshot.getKey());
                         food.setFoodName(foodSnapshot.child("foodName").getValue().toString());
                         food.setFoodPrice(foodSnapshot.child("foodPrice").getValue().toString());
+                        food.setFoodDesc(foodSnapshot.child("foodDesc").getValue().toString());
                         food.setFoodUrlImage(foodSnapshot.child("foodUrlImage").getValue().toString());
                         foodList.add(food);
                     }
