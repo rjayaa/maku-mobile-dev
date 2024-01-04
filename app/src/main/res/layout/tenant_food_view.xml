@@ -38,7 +38,7 @@
         android:layout_below="@id/txtTenantName"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/uba"
         android:text="Desc Tenant"/>
 
     <androidx.recyclerview.widget.RecyclerView
