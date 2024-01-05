@@ -52,7 +52,7 @@ public class CartItemRecycleAdapter extends RecyclerView.Adapter<CartItemRecycle
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        Button btnDecrease, btnIncrease, btnRemove;
+        Button btnDecrease, btnIncrease;
 
         ImageView imageView;
         TextView textfoodname, textfooddesc, textfoodprice, textQuantity;
@@ -60,7 +60,6 @@ public class CartItemRecycleAdapter extends RecyclerView.Adapter<CartItemRecycle
             super(itemView);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
-            btnRemove = itemView.findViewById(R.id.buttonClose);
             textQuantity =itemView.findViewById(R.id.txtQuantity);
             textfoodname = itemView.findViewById(R.id.txtfoodname);
             textfooddesc = itemView.findViewById(R.id.txtfooddesc);
@@ -75,7 +74,7 @@ public class CartItemRecycleAdapter extends RecyclerView.Adapter<CartItemRecycle
                     textQuantity.setText(String.valueOf(food.getQuantity()));
                     listener.onQuantityChanged();
                 } catch (Exception e) {
-                    e.printStackTrace(); // Ini akan mencetak stack trace ke logcat
+                    e.printStackTrace();
                 }
             });
 
@@ -89,13 +88,6 @@ public class CartItemRecycleAdapter extends RecyclerView.Adapter<CartItemRecycle
                 }
             });
 
-            btnRemove.setOnClickListener(v -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    cartitems.remove(position);
-                    notifyItemRemoved(position);
-                }
-            });
 
 
 

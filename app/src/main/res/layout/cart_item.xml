@@ -85,16 +85,6 @@
                 android:textColor="@color/white"
                 android:text="+" />
 
-            <Button
-                android:id="@+id/buttonClose"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="8dp"
-                android:text="X"
-                android:textColor="@color/black"
-                android:background="@drawable/button_close_background"
-                android:layout_alignParentTop="true"/>
 
         </LinearLayout>
 

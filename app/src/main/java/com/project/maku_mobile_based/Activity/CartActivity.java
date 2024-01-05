@@ -5,8 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.project.maku_mobile_based.Adapter.CartItemRecycleAdapter;
@@ -26,6 +31,10 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
     private DatabaseReference databaseReference;
 
 
+    private Button btnshowBackButton,btnCancelOrder,btnCheckoutOrder;
+    private EditText deliveryLocation;
+    private TextView totalPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +43,33 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
             getSupportActionBar().hide();
         }
 
-        cartItems = getIntent().getParcelableArrayListExtra("cartItems"); // Perbaikan di sini
-        if (cartItems != null) {
-            // Tampilkan item keranjang
-            recyclerView = findViewById(R.id.recyclecart); // Ganti dengan ID RecyclerView Anda
-            cartItemRecycleAdapter = new CartItemRecycleAdapter(this, cartItems, this); // Asumsi FoodReycleAdapter bisa menangani ArrayList<Food>
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(cartItemRecycleAdapter);
+        btnshowBackButton = findViewById(R.id.btnShowCart);
+        deliveryLocation = findViewById(R.id.txtInputLocation);
+        totalPrice = findViewById(R.id.txtTotalPrice);
+        btnCancelOrder = findViewById(R.id.btnCancelOrder);
+        btnCheckoutOrder = findViewById(R.id.btnCheckoutOrder);
+        recyclerView = findViewById(R.id.recyclecart);
+
+        cartItems = getIntent().getParcelableArrayListExtra("cartItems");
+        if (cartItems == null) {
+            cartItems = new ArrayList<>();
         }
+
+        cartItemRecycleAdapter = new CartItemRecycleAdapter(this, cartItems, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(cartItemRecycleAdapter);
+
+        updateCartVisibility();
+        btnshowBackButton.setOnClickListener(v->{
+            Intent intent = new Intent(CartActivity.this, MenuActivity.class);
+            startActivity(intent);
+        });
+        btnCancelOrder.setOnClickListener(v -> {
+            Intent intent = new Intent(CartActivity.this, MenuActivity.class);
+            startActivity(intent);
+        });
+
+
 
     }
 
@@ -57,26 +85,28 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
             }
         }
         cartItemRecycleAdapter.notifyDataSetChanged(); // Memperbarui adapter setelah menghapus item
+
+        updateCartVisibility();
     }
 
-
-    private void clearAll() {
-        if (cartItems != null) {
-            cartItems.clear();
-            if (cartItemRecycleAdapter != null) {
-                cartItemRecycleAdapter.notifyDataSetChanged();
-            }
-        }
-        cartItems = new ArrayList<>();
-    }
-
-
-    private void updateCartItems() {
-        cartItems.clear();
-        for (Food food : cartItems) {
-            if (food.getQuantity() > 0) {
-                cartItems.add(food);
-            }
+    private void updateCartVisibility() {
+        Log.d("CartActivity", "Cart items size: " + cartItems.size());
+        if (cartItems.isEmpty()) {
+            btnshowBackButton.setVisibility(View.VISIBLE); // Tampilkan jika kosong
+            deliveryLocation.setVisibility(View.GONE);
+            totalPrice.setVisibility(View.GONE);
+            btnCancelOrder.setVisibility(View.GONE);
+            btnCheckoutOrder.setVisibility(View.GONE);
+        } else {
+            btnshowBackButton.setVisibility(View.GONE);
+            deliveryLocation.setVisibility(View.VISIBLE);
+            totalPrice.setVisibility(View.VISIBLE);
+            btnCancelOrder.setVisibility(View.VISIBLE);
+            btnCheckoutOrder.setVisibility(View.VISIBLE);
         }
     }
+
+
+
+
 }

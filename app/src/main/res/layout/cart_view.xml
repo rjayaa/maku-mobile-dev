@@ -6,10 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".Activity.CartActivity">
 
+    <TextView
+        android:id="@+id/txtGreetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cart"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kampus Binus Alam Sutera"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/txtGreetings"
+        app:layout_constraintTop_toBottomOf="@+id/txtGreetings"
+        android:layout_marginTop="8dp"/>
+
+    <ImageView
+        android:id="@+id/logobinus"
+        android:layout_width="75dp"
+        android:layout_height="57dp"
+        android:src="@drawable/logobinus"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnShowCart"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Back to menu"
+        android:visibility="gone"
+        android:background="@drawable/button_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclecart"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/txtInputLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter delivery location"
+        app:layout_constraintStart_toStartOf="@+id/recyclecart"
+        app:layout_constraintTop_toBottomOf="@+id/recyclecart"
+        app:layout_constraintEnd_toEndOf="@+id/recyclecart"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/txtTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total: "
+        app:layout_constraintStart_toStartOf="@+id/txtInputLocation"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputLocation"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Contoh untuk dua tombol -->
+    <Button
+        android:id="@+id/btnCancelOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel Order"
+        app:layout_constraintStart_toStartOf="@+id/txtTotalPrice"
+        app:layout_constraintTop_toBottomOf="@+id/txtTotalPrice"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnCheckoutOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHECKOUT"
+        app:layout_constraintStart_toEndOf="@+id/btnCancelOrder"
+        app:layout_constraintTop_toTopOf="@+id/btnCancelOrder"
+        android:layout_marginStart="16dp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
