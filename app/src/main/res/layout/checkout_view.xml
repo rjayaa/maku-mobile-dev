@@ -1,43 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.CheckoutActivity">
+    tools:context=".Activity.CheckoutActivity"
+    android:padding="20dp">
 
-    <TextView
-        android:id="@+id/txtGreetings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CHECKOUT"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kampus Binus Alam Sutera"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/txtGreetings"
-        app:layout_constraintTop_toBottomOf="@+id/txtGreetings"
-        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/baseline_arrow_back_24"/>
 
     <ImageView
-        android:id="@+id/logobinus"
+        android:id="@+id/logoBinus"
         android:layout_width="75dp"
         android:layout_height="57dp"
         android:src="@drawable/logobinus"
         android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/headpayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Order"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/logoBinus"/>
+
+    <ImageView
+        android:id="@+id/qris"
+        android:layout_width="250dp"
+        android:layout_height="350dp"
+        android:layout_below="@+id/headpayment"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/qris"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/txtTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/qris"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:text="Rp. 25000"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTotalPrice"
+        android:layout_marginTop="45dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnCancelOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:text="CHECK STATUS"
+            android:textSize="15sp"
+            android:background="@drawable/button_stroke_shape"
+            android:textColor="@color/primaryColor"/>
+
+        <Button
+            android:id="@+id/btnCheckoutOrder"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:text="CHECKOUT"
+            android:textSize="15sp"
+            android:background="@drawable/button_shape"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>
