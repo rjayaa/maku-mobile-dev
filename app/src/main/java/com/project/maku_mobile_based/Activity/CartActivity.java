@@ -119,7 +119,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
 
             }
         }
-        totalPrice.setText("Total: Rp " + String.format("%.2f", total));
+        totalPrice.setText("Total: Rp" + String.format("%,.2f", total));
     }
 
 
