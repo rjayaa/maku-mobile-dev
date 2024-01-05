@@ -70,6 +70,13 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
             startActivity(intent);
         });
 
+        btnCheckoutOrder.setOnClickListener(v->{
+            Intent intent = new Intent(CartActivity.this,CheckoutActivity.class);
+            String totalPriceString = totalPrice.getText().toString();
+
+            intent.putExtra("totalPrice", totalPriceString);
+            startActivity(intent);
+        });
 
 
     }
