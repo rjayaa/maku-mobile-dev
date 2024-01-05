@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.project.maku_mobile_based.R;
 
-public class HistoryOrdersActivity extends AppCompatActivity {
+public class SuccessActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_view);
+        setContentView(R.layout.success_view);
     }
 }

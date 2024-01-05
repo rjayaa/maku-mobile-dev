@@ -18,7 +18,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private TextView textTotalPrice;
     private String tempTotal;
 
-    private Button buttonCancelOrder;
+    private Button buttonCancelOrder, buttonCheckStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,19 @@ public class CheckoutActivity extends AppCompatActivity {
         buttonCancelOrder = findViewById(R.id.btnCancelOrder);
 
         buttonCancelOrder.setOnClickListener(v->{
-            
+                Intent intent = new Intent(CheckoutActivity.this,MenuActivity.class);
+                startActivity(intent);
+
         });
+
+        buttonCheckStatus = findViewById(R.id.btnCheckStatus);
+
+        buttonCheckStatus.setOnClickListener(v->{
+            Intent intent = new Intent(CheckoutActivity.this,SuccessActivity.class);
+            startActivity(intent);
+        });
+
+
 
 
 

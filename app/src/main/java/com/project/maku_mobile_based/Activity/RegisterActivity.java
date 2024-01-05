@@ -24,10 +24,15 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.maku_mobile_based.R;
 import com.project.maku_mobile_based.model.User;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -128,54 +133,50 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-
     private void registerUser(String txtFullName, String txtPhoneNumber, String txtEmail, String txtPassword) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
         // create user
-        auth.createUserWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "User successfully registered!", Toast.LENGTH_LONG).show();
-                    FirebaseUser firebaseUser = auth.getCurrentUser();
+        auth.createUserWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                FirebaseUser firebaseUser = auth.getCurrentUser();
 
-                    // generate user object
-                    User usr = new User(txtFullName, txtPhoneNumber, txtEmail);
-                    db.collection("Users").document(firebaseUser.getUid()).set(usr).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(RegisterActivity.this, "User registration failed, Please try again!",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                } else {
-                    try {
-                        throw task.getException();
-                    } catch (FirebaseAuthWeakPasswordException e) {
-                        etPassword.setError("Your password is too weak");
-                        etPassword.requestFocus();
-                    } catch (FirebaseAuthInvalidCredentialsException e) {
-                        etPassword.setError("Your email is invalid or already in use");
-                        etPassword.requestFocus();
-                    } catch (FirebaseAuthUserCollisionException e) {
-                        etPassword.setError("User is already registered with this email, use another email");
-                        etPassword.requestFocus();
-                    } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
-                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(txtFullName)
+                        .build();
+
+                firebaseUser.updateProfile(profileUpdates).addOnCompleteListener(updateTask -> {
+                    if (updateTask.isSuccessful()) {
+                        User usr = new User(txtFullName, txtPhoneNumber, txtEmail);
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
+                        userRef.child(firebaseUser.getUid()).setValue(usr)
+                                .addOnSuccessListener(unused -> {
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                })
+                                .addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "User registration failed, Please try again!", Toast.LENGTH_LONG).show());
                     }
+                });
+            } else {
+                try {
+                    throw task.getException();
+                } catch (FirebaseAuthWeakPasswordException e) {
+                    etPassword.setError("Your password is too weak");
+                    etPassword.requestFocus();
+                } catch (FirebaseAuthInvalidCredentialsException e) {
+                    etEmail.setError("Your email is invalid or already in use");
+                    etEmail.requestFocus();
+                } catch (FirebaseAuthUserCollisionException e) {
+                    etEmail.setError("User is already registered with this email, use another email");
+                    etEmail.requestFocus();
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                    Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
+
 }

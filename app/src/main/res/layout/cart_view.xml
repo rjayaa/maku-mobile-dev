@@ -88,21 +88,6 @@
             android:hint="Enter your location location"/>
 
         <TextView
-            android:id="@+id/lblLocationDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:text="Location Details"/>
-
-        <EditText
-            android:id="@+id/txtLocationDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:hint="e.g. Floor, unit number"/>
-
-        <TextView
             android:id="@+id/txtTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

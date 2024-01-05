@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +28,7 @@ import com.project.maku_mobile_based.R;
 import com.project.maku_mobile_based.model.Food;
 import com.project.maku_mobile_based.model.OrderItem;
 import com.project.maku_mobile_based.model.Orders;
+import com.project.maku_mobile_based.model.User;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,6 +46,10 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
     private EditText deliveryLocation;
     private TextView totalPrice;
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = mAuth.getCurrentUser();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +64,8 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
         btnCancelOrder = findViewById(R.id.btnCancelOrder);
         btnCheckoutOrder = findViewById(R.id.btnCheckoutOrder);
         recyclerView = findViewById(R.id.recyclecart);
+        deliveryLocation = findViewById(R.id.txtInputLocation);
+
 
         cartItems = getIntent().getParcelableArrayListExtra("cartItems");
         if (cartItems == null) {
@@ -70,7 +79,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
         updateTotalPrice();
         updateCartVisibility();
         initializeOrderId();
-        btnshowBackButton.setOnClickListener(v->{
+        btnshowBackButton.setOnClickListener(v -> {
             Intent intent = new Intent(CartActivity.this, MenuActivity.class);
             startActivity(intent);
         });
@@ -79,40 +88,55 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
             startActivity(intent);
         });
 
-        btnCheckoutOrder.setOnClickListener(v->{
+        btnCheckoutOrder.setOnClickListener(v -> {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        // Membuat OrderItems dari cartItems
+                        List<OrderItem> orderItems = new ArrayList<>();
+                        for (Food food : cartItems) {
+                            orderItems.add(new OrderItem(food.getFoodName(), (int) Double.parseDouble(food.getFoodPrice())));
+                        }
 
-            // 1. Buat OrderItems dari cartItems
-            List<OrderItem> orderItems = new ArrayList<>();
-            for (Food food : cartItems) {
-                orderItems.add(new OrderItem(food.getFoodName(), (int) Double.parseDouble(food.getFoodPrice())));
-            }
+                        // Menentukan ID order dan status order
+                        int orderId = generateOrderId();
+                        String orderStatus = "pending";
 
-            // 2. Tentukan ID order dan status order
-            int orderId = generateOrderId(); // Implementasi generateOrderId() terserah Anda
-            String orderStatus = "pending"; // Contoh status
+                        // Membersihkan format total harga
+                        String cleanNumber = totalPrice.getText().toString().replaceAll("[^\\d.,]", "");
 
-            // 3. Buat objek Order
-            Orders order = new Orders(orderId, orderItems, orderStatus);
+                        // Membuat objek Orders
+                        Orders order = new Orders(orderId, orderItems, orderStatus, user.getFullName(), deliveryLocation.getText().toString(), cleanNumber, user.getPhoneNumber());
 
-            // 4. Simpan ke Firebase
-            DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference("orders");
-            ordersRef.child("order_" + orderId).setValue(order)
-                    .addOnSuccessListener(aVoid -> {
-                        // Berhasil menyimpan order, lakukan tindakan selanjutnya
-                        Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
-                        String totalPriceString = totalPrice.getText().toString();
-                        intent.putExtra("totalPrice", totalPriceString);
-                        startActivity(intent);
-                    })
-                    .addOnFailureListener(e -> {
-                        // Gagal menyimpan order, tampilkan error
-                        Log.e("CartActivity", "Failed to save order", e);
-                    });
-            saveNewOrderId();
+                        // Menyimpan ke Firebase
+                        DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference("orders");
+                        ordersRef.child("order_" + orderId).setValue(order)
+                                .addOnSuccessListener(aVoid -> {
+                                    // Berhasil menyimpan order
+                                    Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
+                                    intent.putExtra("totalPrice", cleanNumber);
+                                    startActivity(intent);
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Gagal menyimpan order
+                                    Log.e("CartActivity", "Failed to save order", e);
+                                });
+                        saveNewOrderId();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("CartActivity", "Error loading user data", databaseError.toException());
+                }
+            });
         });
     }
 
-    @Override
+        @Override
     public void onQuantityChanged() {
         // Menggunakan Iterator untuk menghindari ConcurrentModificationException saat menghapus item
         Iterator<Food> iterator = cartItems.iterator();
@@ -157,7 +181,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
 
             }
         }
-        totalPrice.setText("Total: Rp" + String.format("%,.2f", total));
+        totalPrice.setText("Total: Rp " + String.format("%,.2f", total));
     }
 
     private void initializeOrderId() {
