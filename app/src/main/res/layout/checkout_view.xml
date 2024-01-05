@@ -63,22 +63,22 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/btnCancelOrder"
+            android:id="@+id/btnCheckoutOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="300dp"
-            android:text="CHECK STATUS"
+            android:text="CANCEL ORDER"
             android:textSize="15sp"
             android:background="@drawable/button_stroke_shape"
             android:textColor="@color/primaryColor"/>
 
         <Button
-            android:id="@+id/btnCheckoutOrder"
+            android:id="@+id/btnCancelOrder"
             android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="300dp"
-            android:text="CANCEL ORDER"
+            android:text="CHECK STATUS"
             android:textSize="15sp"
             android:background="@drawable/button_shape"
             android:textColor="@color/white"/>
