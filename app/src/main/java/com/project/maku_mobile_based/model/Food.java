@@ -1,8 +1,11 @@
 package com.project.maku_mobile_based.model;
 
-public class Food {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    String foodName,foodDesc,foodUrlImage,foodPrice;
+public class Food implements Parcelable {
+
+    private String foodName,foodDesc,foodUrlImage,foodPrice;
    private int quantity = 0;
 
    public Food(){
@@ -55,4 +58,38 @@ public class Food {
     public void setFoodPrice(String foodPrice) {
         this.foodPrice = foodPrice;
     }
+
+    protected Food(Parcel in) {
+        foodName = in.readString();
+        foodDesc = in.readString();
+        foodUrlImage = in.readString();
+        foodPrice = in.readString();
+        quantity = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(foodName);
+        dest.writeString(foodDesc);
+        dest.writeString(foodUrlImage);
+        dest.writeString(foodPrice);
+        dest.writeInt(quantity);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Food> CREATOR = new Creator<Food>() {
+        @Override
+        public Food createFromParcel(Parcel in) {
+            return new Food(in);
+        }
+
+        @Override
+        public Food[] newArray(int size) {
+            return new Food[size];
+        }
+    };
 }

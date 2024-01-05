@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.project.maku_mobile_based.Adapter.FoodReycleAdapter;
+import com.project.maku_mobile_based.Adapter.FoodRecycleAdapter;
 import com.project.maku_mobile_based.OnChangeQuantity;
 import com.project.maku_mobile_based.R;
 import com.project.maku_mobile_based.model.Food;
@@ -31,10 +31,11 @@ import java.util.ArrayList;
 public class TenantFoodActivity extends AppCompatActivity implements OnChangeQuantity {
     RecyclerView recyclerView;
     private DatabaseReference database;
-    private FoodReycleAdapter foodReycleAdapter;
+    private FoodRecycleAdapter foodRecycleAdapter;
     private ArrayList<Food> foodList;
     private Context context;
     private Button backBtn, btnShowCart;
+    private ArrayList<Food> cartItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
         ImageView imageView = findViewById(R.id.tenantimage);
         backBtn = findViewById(R.id.backBtn);
         btnShowCart = findViewById(R.id.btnShowCart);
-        foodReycleAdapter = new FoodReycleAdapter(getApplicationContext(),foodList,this);
+        foodRecycleAdapter = new FoodRecycleAdapter(getApplicationContext(),foodList,this);
 
         nameText.setText(name);
         descriptionText.setText(description);
@@ -76,6 +77,14 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
                 finish();
             }
         });
+        btnShowCart.setOnClickListener(v -> {
+            Intent intent = new Intent(TenantFoodActivity.this, CartActivity.class);
+            intent.putExtra("cartItems", cartItems);
+            startActivity(intent);
+        });
+
+
+
     }
 
     private void getDataFromFirebase(String tenantName) {
@@ -96,9 +105,9 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
                     }
                 }
 
-                foodReycleAdapter = new FoodReycleAdapter(getApplicationContext(), foodList,TenantFoodActivity.this);
-                recyclerView.setAdapter(foodReycleAdapter);
-                foodReycleAdapter.notifyDataSetChanged();
+                foodRecycleAdapter = new FoodRecycleAdapter(getApplicationContext(), foodList,TenantFoodActivity.this);
+                recyclerView.setAdapter(foodRecycleAdapter);
+                foodRecycleAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -111,23 +120,32 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
     private void clearAll() {
         if (foodList != null) {
             foodList.clear();
-
-            if (foodReycleAdapter != null) {
-                foodReycleAdapter.notifyDataSetChanged();
+            if (foodRecycleAdapter != null) {
+                foodRecycleAdapter.notifyDataSetChanged();
             }
         }
-
         foodList = new ArrayList<>();
     }
 
     @Override
     public void onQuantityChanged() {
+        updateCartItems();
         if (isAnyFoodQuantityMoreThanZero()) {
             btnShowCart.setVisibility(View.VISIBLE);
-        } else if(!isAnyFoodQuantityMoreThanZero()) {
+        } else {
             btnShowCart.setVisibility(View.GONE);
         }
     }
+
+    private void updateCartItems() {
+        cartItems.clear();
+        for (Food food : foodList) {
+            if (food.getQuantity() > 0) {
+                cartItems.add(food);
+            }
+        }
+    }
+
 
     private boolean isAnyFoodQuantityMoreThanZero() {
         for (Food food : foodList) {
@@ -137,4 +155,7 @@ public class TenantFoodActivity extends AppCompatActivity implements OnChangeQua
         }
         return false;
     }
+
+
+
 }

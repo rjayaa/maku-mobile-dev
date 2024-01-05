@@ -18,11 +18,11 @@ import com.project.maku_mobile_based.R;
 import com.project.maku_mobile_based.model.Food;
 
 
-public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.ViewHolder> {
+public class FoodRecycleAdapter extends RecyclerView.Adapter<FoodRecycleAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Food> foodlist;
     private OnChangeQuantity listener;
-    public FoodReycleAdapter(Context context, ArrayList<Food> foodlist, OnChangeQuantity listener) {
+    public FoodRecycleAdapter(Context context, ArrayList<Food> foodlist, OnChangeQuantity listener) {
         this.context = context;
         this.foodlist = foodlist;
         this.listener = listener;
@@ -30,18 +30,21 @@ public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.Vi
 
     @NonNull
     @Override
-    public FoodReycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FoodRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tenant_food_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodReycleAdapter.ViewHolder holder, int position) {
-        holder.textfoodname.setText(foodlist.get(position).getFoodName().toString());
-        holder.textfooddesc.setText(foodlist.get(position).getFoodDesc().toString());
-        holder.textfoodprice.setText(foodlist.get(position).getFoodPrice().toString());
-        Glide.with(context).load(foodlist.get(position).getFoodUrlImage()).into(holder.imageView);
+    public void onBindViewHolder(@NonNull FoodRecycleAdapter.ViewHolder holder, int position) {
+        Food food = foodlist.get(position);
+        holder.textfoodname.setText(food.getFoodName());
+        holder.textfooddesc.setText(food.getFoodDesc());
+        holder.textfoodprice.setText(food.getFoodPrice());
+        holder.textQuantity.setText(String.valueOf(food.getQuantity()));
+        Glide.with(context).load(food.getFoodUrlImage()).into(holder.imageView);
     }
+
 
     @Override
     public int getItemCount() {
@@ -82,9 +85,6 @@ public class FoodReycleAdapter extends RecyclerView.Adapter<FoodReycleAdapter.Vi
                     listener.onQuantityChanged();
                 }
             });
-
-
-
         }
     }
 }
