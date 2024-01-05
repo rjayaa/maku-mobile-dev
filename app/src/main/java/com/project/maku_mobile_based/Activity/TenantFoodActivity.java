@@ -29,7 +29,7 @@ import com.project.maku_mobile_based.model.Food;
 import java.util.ArrayList;
 
 public class TenantFoodActivity extends AppCompatActivity implements OnChangeQuantity {
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private DatabaseReference database;
     private FoodRecycleAdapter foodRecycleAdapter;
     private ArrayList<Food> foodList;

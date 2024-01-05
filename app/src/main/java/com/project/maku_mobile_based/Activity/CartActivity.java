@@ -38,7 +38,6 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
     private CartItemRecycleAdapter cartItemRecycleAdapter;
     private Context context;
     private DatabaseReference databaseReference;
-
     private int lastOrderId;
     private Button btnshowBackButton,btnCancelOrder,btnCheckoutOrder;
     private EditText deliveryLocation;
@@ -109,11 +108,8 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
                         // Gagal menyimpan order, tampilkan error
                         Log.e("CartActivity", "Failed to save order", e);
                     });
-
             saveNewOrderId();
         });
-
-
     }
 
     @Override
@@ -166,25 +162,36 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
 
     private void initializeOrderId() {
         databaseReference = FirebaseDatabase.getInstance().getReference("orders");
-        databaseReference.child("lastOrderId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    lastOrderId = snapshot.getValue(Integer.class);
-                } else {
-                    lastOrderId = 0; // Jika belum ada, mulai dari 0
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int maxId = 0;
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String key = child.getKey();
+                    if (key != null && key.startsWith("order_")) {
+                        try {
+                            int id = Integer.parseInt(key.substring(6)); // Mengambil angka dari "order_x"
+                            if (id > maxId) {
+                                maxId = id;
+                            }
+                        } catch (NumberFormatException e) {
+                            Log.e("CartActivity", "Error parsing order ID: " + key, e);
+                        }
+                    }
                 }
+                lastOrderId = maxId; // Setelah loop, maxId adalah ID order tertinggi
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("CartActivity", "Error loading last order ID", error.toException());
+                Log.e("CartActivity", "Error loading orders", error.toException());
             }
         });
     }
 
+
     private int generateOrderId() {
-        return ++lastOrderId; // Tambahkan 1 ke ID terakhir
+        return ++lastOrderId;
     }
 
     private void saveNewOrderId() {
