@@ -1,8 +1,10 @@
 package com.project.maku_mobile_based.model;
 
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Orders {
+public class Orders  {
     private int orderId;
     private List<OrderItem> orderItems;
     private String orderStatus;

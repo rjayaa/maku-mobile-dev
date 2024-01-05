@@ -1,5 +1,6 @@
 package com.project.maku_mobile_based.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,14 +14,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.maku_mobile_based.Adapter.CartItemRecycleAdapter;
 import com.project.maku_mobile_based.Adapter.FoodRecycleAdapter;
 import com.project.maku_mobile_based.OnChangeQuantity;
 import com.project.maku_mobile_based.R;
 import com.project.maku_mobile_based.model.Food;
+import com.project.maku_mobile_based.model.OrderItem;
+import com.project.maku_mobile_based.model.Orders;
+
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class CartActivity extends AppCompatActivity implements OnChangeQuantity {
 
@@ -30,7 +39,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
     private Context context;
     private DatabaseReference databaseReference;
 
-
+    private int lastOrderId;
     private Button btnshowBackButton,btnCancelOrder,btnCheckoutOrder;
     private EditText deliveryLocation;
     private TextView totalPrice;
@@ -61,6 +70,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
 
         updateTotalPrice();
         updateCartVisibility();
+        initializeOrderId();
         btnshowBackButton.setOnClickListener(v->{
             Intent intent = new Intent(CartActivity.this, MenuActivity.class);
             startActivity(intent);
@@ -71,11 +81,36 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
         });
 
         btnCheckoutOrder.setOnClickListener(v->{
-            Intent intent = new Intent(CartActivity.this,CheckoutActivity.class);
-            String totalPriceString = totalPrice.getText().toString();
 
-            intent.putExtra("totalPrice", totalPriceString);
-            startActivity(intent);
+            // 1. Buat OrderItems dari cartItems
+            List<OrderItem> orderItems = new ArrayList<>();
+            for (Food food : cartItems) {
+                orderItems.add(new OrderItem(food.getFoodName(), (int) Double.parseDouble(food.getFoodPrice())));
+            }
+
+            // 2. Tentukan ID order dan status order
+            int orderId = generateOrderId(); // Implementasi generateOrderId() terserah Anda
+            String orderStatus = "pending"; // Contoh status
+
+            // 3. Buat objek Order
+            Orders order = new Orders(orderId, orderItems, orderStatus);
+
+            // 4. Simpan ke Firebase
+            DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference("orders");
+            ordersRef.child("order_" + orderId).setValue(order)
+                    .addOnSuccessListener(aVoid -> {
+                        // Berhasil menyimpan order, lakukan tindakan selanjutnya
+                        Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
+                        String totalPriceString = totalPrice.getText().toString();
+                        intent.putExtra("totalPrice", totalPriceString);
+                        startActivity(intent);
+                    })
+                    .addOnFailureListener(e -> {
+                        // Gagal menyimpan order, tampilkan error
+                        Log.e("CartActivity", "Failed to save order", e);
+                    });
+
+            saveNewOrderId();
         });
 
 
@@ -129,9 +164,30 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
         totalPrice.setText("Total: Rp" + String.format("%,.2f", total));
     }
 
+    private void initializeOrderId() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("orders");
+        databaseReference.child("lastOrderId").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    lastOrderId = snapshot.getValue(Integer.class);
+                } else {
+                    lastOrderId = 0; // Jika belum ada, mulai dari 0
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CartActivity", "Error loading last order ID", error.toException());
+            }
+        });
+    }
 
+    private int generateOrderId() {
+        return ++lastOrderId; // Tambahkan 1 ke ID terakhir
+    }
 
-
-
+    private void saveNewOrderId() {
+        databaseReference.child("lastorderId").setValue(lastOrderId);
+    }
 }
