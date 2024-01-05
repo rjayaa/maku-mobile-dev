@@ -59,6 +59,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cartItemRecycleAdapter);
 
+        updateTotalPrice();
         updateCartVisibility();
         btnshowBackButton.setOnClickListener(v->{
             Intent intent = new Intent(CartActivity.this, MenuActivity.class);
@@ -75,7 +76,6 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
 
     @Override
     public void onQuantityChanged() {
-//        updateCartItems();
         // Menggunakan Iterator untuk menghindari ConcurrentModificationException saat menghapus item
         Iterator<Food> iterator = cartItems.iterator();
         while (iterator.hasNext()) {
@@ -85,14 +85,14 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
             }
         }
         cartItemRecycleAdapter.notifyDataSetChanged(); // Memperbarui adapter setelah menghapus item
-
+        updateTotalPrice();
         updateCartVisibility();
     }
 
     private void updateCartVisibility() {
         Log.d("CartActivity", "Cart items size: " + cartItems.size());
         if (cartItems.isEmpty()) {
-            btnshowBackButton.setVisibility(View.VISIBLE); // Tampilkan jika kosong
+            btnshowBackButton.setVisibility(View.VISIBLE);
             deliveryLocation.setVisibility(View.GONE);
             totalPrice.setVisibility(View.GONE);
             btnCancelOrder.setVisibility(View.GONE);
@@ -105,6 +105,24 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
             btnCheckoutOrder.setVisibility(View.VISIBLE);
         }
     }
+
+    private void updateTotalPrice() {
+        Log.d("CartActivity", "updateTotalPrice called");
+        double total = 0;
+        for (Food food : cartItems) {
+            try {
+                double price = Double.parseDouble(food.getFoodPrice());
+                int quantity = food.getQuantity();
+                total += price * quantity;
+            } catch (NumberFormatException e) {
+                Log.e("CartActivity", "Invalid price format: " + food.getFoodPrice(), e);
+
+            }
+        }
+        totalPrice.setText("Total: Rp " + String.format("%.2f", total));
+    }
+
+
 
 
 
