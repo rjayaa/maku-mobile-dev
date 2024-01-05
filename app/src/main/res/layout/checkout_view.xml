@@ -7,11 +7,10 @@
     tools:context=".Activity.CheckoutActivity"
     android:padding="20dp">
 
-    <Button
-        android:id="@+id/backBtn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/baseline_arrow_back_24"/>
+    <ImageView
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:src="@drawable/maku_logo"/>
 
     <ImageView
         android:id="@+id/logoBinus"
@@ -79,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="300dp"
-            android:text="CHECKOUT"
+            android:text="CANCEL ORDER"
             android:textSize="15sp"
             android:background="@drawable/button_shape"
             android:textColor="@color/white"/>
