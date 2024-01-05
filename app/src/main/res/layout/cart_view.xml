@@ -1,45 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.CartActivity">
 
-    <TextView
-        android:id="@+id/txtGreetings"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/layoutsatu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cart"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"/>
+        android:padding="20dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kampus Binus Alam Sutera"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/txtGreetings"
-        app:layout_constraintTop_toBottomOf="@+id/txtGreetings"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/txtGreetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Cart"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
 
-    <ImageView
-        android:id="@+id/logobinus"
-        android:layout_width="75dp"
-        android:layout_height="57dp"
-        android:src="@drawable/logobinus"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtGreetings"
+            android:text="Kampus Binus Alam Sutera"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="57dp"
+            android:src="@drawable/logobinus"
+            android:padding="5dp"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnShowCart"
@@ -48,60 +45,76 @@
         android:text="Back to menu"
         android:visibility="gone"
         android:background="@drawable/button_shape"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
+    <ScrollView
+        android:id="@+id/menuList"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_below="@+id/layoutsatu"
+        android:layout_marginTop="10dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclecart"
-        android:layout_width="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclecart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layoutdua"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_below="@+id/menuList"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtInputLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Enter delivery location"
-        app:layout_constraintStart_toStartOf="@+id/recyclecart"
-        app:layout_constraintTop_toBottomOf="@+id/recyclecart"
-        app:layout_constraintEnd_toEndOf="@+id/recyclecart"
-        android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/txtInputLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:hint="Enter delivery location"/>
 
-    <TextView
-        android:id="@+id/txtTotalPrice"
+        <TextView
+            android:id="@+id/txtTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:text="Total: "/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total: "
-        app:layout_constraintStart_toStartOf="@+id/txtInputLocation"
-        app:layout_constraintTop_toBottomOf="@+id/txtInputLocation"
-        android:layout_marginTop="8dp"/>
+        android:layout_below="@+id/layoutdua"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <!-- Contoh untuk dua tombol -->
-    <Button
-        android:id="@+id/btnCancelOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel Order"
-        app:layout_constraintStart_toStartOf="@+id/txtTotalPrice"
-        app:layout_constraintTop_toBottomOf="@+id/txtTotalPrice"
-        android:layout_marginTop="16dp"/>
+        <Button
+            android:id="@+id/btnCancelOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:text="CANCEL ORDER"
+            android:textSize="15sp"
+            android:background="@drawable/button_stroke_shape"
+            android:textColor="@color/primaryColor"/>
 
-    <Button
-        android:id="@+id/btnCheckoutOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CHECKOUT"
-        app:layout_constraintStart_toEndOf="@+id/btnCancelOrder"
-        app:layout_constraintTop_toTopOf="@+id/btnCancelOrder"
-        android:layout_marginStart="16dp"/>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnCheckoutOrder"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:text="CHECKOUT"
+            android:textSize="15sp"
+            android:background="@drawable/button_shape"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</RelativeLayout>
