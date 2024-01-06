@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="325dp"
         android:layout_below="@+id/layoutsatu"
-        android:padding="12dp">
+        android:padding="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclecart"

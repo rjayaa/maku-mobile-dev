@@ -44,12 +44,6 @@ public class MenuActivity extends AppCompatActivity implements TenantRecyclerVie
         }
         recyclerView = findViewById(R.id.tenantsList);
 
-        Spinner customSpinner = findViewById(R.id.customSpinner);
-
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.SpinnerSort, R.layout.custom_spinner);
-        customSpinner.setAdapter(adapter);
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 

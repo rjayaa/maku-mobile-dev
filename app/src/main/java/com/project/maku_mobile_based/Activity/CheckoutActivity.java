@@ -51,7 +51,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         buttonCheckStatus.setOnClickListener(v->{
             showNotification("MAKU", "Payment success!");
-            Intent intent = new Intent(CheckoutActivity.this,SuccessActivity.class);
+            Intent intent = new Intent(CheckoutActivity.this,HistoryOrdersActivity.class);
             startActivity(intent);
         });
     }
