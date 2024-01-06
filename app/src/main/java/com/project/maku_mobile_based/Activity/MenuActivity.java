@@ -22,6 +22,7 @@ import com.project.maku_mobile_based.TenantRecyclerViewInterface;
 import com.project.maku_mobile_based.model.Tenants;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -56,6 +57,20 @@ public class MenuActivity extends AppCompatActivity implements TenantRecyclerVie
 
         tenantlist = new ArrayList<>();
 
+
+        SearchView searchView = findViewById(R.id.search_bar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                tenantRecycleAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         // Clear Array List
         clearAll();
 

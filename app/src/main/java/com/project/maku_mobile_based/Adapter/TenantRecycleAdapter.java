@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,9 +19,10 @@ import com.project.maku_mobile_based.model.Tenants;
 
 import java.util.ArrayList;
 
-public class TenantRecycleAdapter extends RecyclerView.Adapter<TenantRecycleAdapter.ViewHolder> {
+public class TenantRecycleAdapter extends RecyclerView.Adapter<TenantRecycleAdapter.ViewHolder> implements Filterable {
     private final TenantRecyclerViewInterface tenantRecyclerViewInterface;
 
+    private ArrayList<Tenants> tenantlistFull;
     private static final String Tag = "RecyclerView";
     private Context tContext ;
     private ArrayList<Tenants> tenantlist;
@@ -28,6 +31,7 @@ public class TenantRecycleAdapter extends RecyclerView.Adapter<TenantRecycleAdap
         this.tContext = tContext;
         this.tenantlist = tenantlist;
         this.tenantRecyclerViewInterface = tenantRecyclerViewInterface;
+        tenantlistFull = new ArrayList<>(tenantlist);
     }
 
     @NonNull
@@ -49,6 +53,42 @@ public class TenantRecycleAdapter extends RecyclerView.Adapter<TenantRecycleAdap
         return tenantlist.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return tenantFilter;
+    }
+
+
+    private Filter tenantFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Tenants> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(tenantlistFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Tenants item : tenantlistFull) {
+                    if (item.getTenantsName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            tenantlist.clear();
+            tenantlist.addAll((ArrayList) results.values);
+            notifyDataSetChanged();
+        }
+    };
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         // Widgets
