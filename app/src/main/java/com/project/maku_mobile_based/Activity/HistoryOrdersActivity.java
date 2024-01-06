@@ -34,6 +34,7 @@ public class HistoryOrdersActivity extends AppCompatActivity {
     private HistoryItemRecycleAdapter historyItemRecycleAdapter;
     private Context context;
     private DatabaseReference databaseReference;
+    private Button buttonBackToMenu;
 
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -48,6 +49,13 @@ public class HistoryOrdersActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclehistory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
+
+        buttonBackToMenu = findViewById(R.id.btnBackToMenu);
+
+        buttonBackToMenu.setOnClickListener(v->{
+            Intent intent = new Intent(HistoryOrdersActivity.this,MenuActivity.class);
+            startActivity(intent);
+        });
 
         orderItems = new ArrayList<>();
         historyItemRecycleAdapter = new HistoryItemRecycleAdapter(this, orderItems, /*listener*/ null);
