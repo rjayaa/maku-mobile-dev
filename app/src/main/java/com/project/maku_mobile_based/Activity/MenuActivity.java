@@ -22,6 +22,7 @@ import com.project.maku_mobile_based.TenantRecyclerViewInterface;
 import com.project.maku_mobile_based.model.Tenants;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
@@ -34,6 +35,7 @@ public class MenuActivity extends AppCompatActivity implements TenantRecyclerVie
     private TenantRecycleAdapter tenantRecycleAdapter;
     private ArrayList<Tenants> tenantlist;
     private Context tcontext;
+    private Button buttonToActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,12 @@ public class MenuActivity extends AppCompatActivity implements TenantRecyclerVie
 
         tenantlist = new ArrayList<>();
 
+        buttonToActivity = findViewById(R.id.btnToActivity);
+
+        buttonToActivity.setOnClickListener(v->{
+            Intent intent = new Intent(MenuActivity.this,HistoryOrdersActivity.class);
+            startActivity(intent);
+        });
 
         SearchView searchView = findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

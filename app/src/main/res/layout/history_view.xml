@@ -43,7 +43,7 @@
     <ScrollView
         android:id="@+id/menuList"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="600dp"
         android:layout_below="@+id/layoutsatu"
         android:padding="12dp">
 
@@ -54,23 +54,27 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/menuList"
-        android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/menuList"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
         android:gravity="center">
 
         <Button
             android:id="@+id/btnBackToMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="300dp"
-            android:text="Back To Menu"
-            android:textSize="15sp"
-            android:background="@drawable/button_shape"
-            android:textColor="@color/white"/>
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/homeabu"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/activityijo" />
     </LinearLayout>
 
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
