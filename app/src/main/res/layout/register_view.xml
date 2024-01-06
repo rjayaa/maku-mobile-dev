@@ -137,6 +137,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:textSize="15sp"
+            android:inputType="textPassword"
             android:hint="@string/HintPassword"/>
 
         <TextView
@@ -156,6 +157,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:textSize="15sp"
+            android:inputType="textPassword"
             android:hint="@string/HintConfirmPassword"/>
     </LinearLayout>
 

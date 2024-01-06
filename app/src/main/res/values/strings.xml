@@ -33,6 +33,7 @@
     <string name="channel_name">Nama Channel Anda</string>
     <string name="channel_Description">Description</string>
     <string name="msg_token_fmt">Description</string>
+    <string name="MAKU">MAKU</string>
 
     <string-array name="SpinnerSort">
         <item>Rating</item>
