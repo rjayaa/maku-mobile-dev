@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Order ID and Status -->
+        <TextView
+            android:id="@+id/txtOrderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order ID: #123"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txtOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: In the Kitchen"
+            android:textSize="14sp"
+            android:textColor="@color/uba" />
+
+        <!-- User Information -->
+        <TextView
+            android:id="@+id/txtUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username: John Doe"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location: Room 101"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+
+        <!-- Order Items -->
+        <TextView
+            android:id="@+id/txtOrderItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Items: Pizza, Burger"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+
+        <!-- Total Price -->
+        <TextView
+            android:id="@+id/txtTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Price: Rp 5.000"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+
+        <!-- Phone Number -->
+        <TextView
+            android:id="@+id/txtPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone: +123456789"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

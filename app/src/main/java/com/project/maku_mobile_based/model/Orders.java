@@ -10,6 +10,7 @@ public class Orders  {
     private String orderStatus;
     private String username,location,totalPrice,phoneNumber;
 
+    public Orders(){};
     public Orders(int orderId, List<OrderItem> orderItems, String orderStatus, String username, String location, String totalPrice, String phoneNumber) {
         this.orderId = orderId;
         this.orderItems = orderItems;
@@ -19,6 +20,7 @@ public class Orders  {
         this.totalPrice = totalPrice;
         this.phoneNumber = phoneNumber;
     }
+
 
     public int getOrderId() {
         return orderId;
