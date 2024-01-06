@@ -1,8 +1,14 @@
 package com.project.maku_mobile_based.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -44,13 +50,43 @@ public class CheckoutActivity extends AppCompatActivity {
         buttonCheckStatus = findViewById(R.id.btnCheckStatus);
 
         buttonCheckStatus.setOnClickListener(v->{
+            showNotification("MAKU", "Payment success!");
             Intent intent = new Intent(CheckoutActivity.this,SuccessActivity.class);
             startActivity(intent);
         });
-
-
-
-
-
     }
+
+    private void showNotification(String title, String message) {
+        final String CHANNEL_ID = "HEADS_UP_NOTIFICATION";
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Membuat channel notifikasi untuk Android Oreo dan lebih tinggi
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID, "Heads Up Notification", NotificationManager.IMPORTANCE_HIGH
+            );
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        PendingIntent pendingIntent = createPendingIntent();
+
+        // Membuat notifikasi
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setSmallIcon(R.drawable.maku_logo)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        // Menampilkan notifikasi
+        notificationManager.notify(1, notificationBuilder.build());
+    }
+
+
+    private PendingIntent createPendingIntent() {
+        Intent intent = new Intent(this ,SuccessActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
 }

@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.project.maku_mobile_based.Adapter.CartItemRecycleAdapter;
 import com.project.maku_mobile_based.Adapter.FoodRecycleAdapter;
 import com.project.maku_mobile_based.OnChangeQuantity;
@@ -134,6 +135,9 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
                 }
             });
         });
+
+
+
     }
 
         @Override
@@ -221,4 +225,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
     private void saveNewOrderId() {
         databaseReference.child("lastorderId").setValue(lastOrderId);
     }
+
+
+
 }
