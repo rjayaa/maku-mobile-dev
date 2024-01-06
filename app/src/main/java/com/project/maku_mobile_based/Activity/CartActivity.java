@@ -96,33 +96,33 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
                     if (user != null) {
-                        // Membuat OrderItems dari cartItems
+                        
                         List<OrderItem> orderItems = new ArrayList<>();
                         for (Food food : cartItems) {
                             orderItems.add(new OrderItem(food.getFoodName(), (int) Double.parseDouble(food.getFoodPrice())));
                         }
 
-                        // Menentukan ID order dan status order
+                        
                         int orderId = generateOrderId();
                         String orderStatus = "pending";
 
-                        // Membersihkan format total harga
+                        
                         String cleanNumber = totalPrice.getText().toString().replaceAll("[^\\d.,]", "");
 
-                        // Membuat objek Orders
+                        
                         Orders order = new Orders(orderId, orderItems, orderStatus, user.getFullName(), deliveryLocation.getText().toString(), cleanNumber, user.getPhoneNumber());
 
-                        // Menyimpan ke Firebase
+                        
                         DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference("orders");
                         ordersRef.child("order_" + orderId).setValue(order)
                                 .addOnSuccessListener(aVoid -> {
-                                    // Berhasil menyimpan order
+                                    
                                     Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
                                     intent.putExtra("totalPrice", cleanNumber);
                                     startActivity(intent);
                                 })
                                 .addOnFailureListener(e -> {
-                                    // Gagal menyimpan order
+                                    
                                     Log.e("CartActivity", "Failed to save order", e);
                                 });
                         saveNewOrderId();
@@ -142,15 +142,15 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
 
         @Override
     public void onQuantityChanged() {
-        // Menggunakan Iterator untuk menghindari ConcurrentModificationException saat menghapus item
+        
         Iterator<Food> iterator = cartItems.iterator();
         while (iterator.hasNext()) {
             Food food = iterator.next();
             if (food.getQuantity() == 0) {
-                iterator.remove(); // Menghapus item dari daftar
+                iterator.remove(); 
             }
         }
-        cartItemRecycleAdapter.notifyDataSetChanged(); // Memperbarui adapter setelah menghapus item
+        cartItemRecycleAdapter.notifyDataSetChanged(); 
         updateTotalPrice();
         updateCartVisibility();
     }
@@ -198,7 +198,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
                     String key = child.getKey();
                     if (key != null && key.startsWith("order_")) {
                         try {
-                            int id = Integer.parseInt(key.substring(6)); // Mengambil angka dari "order_x"
+                            int id = Integer.parseInt(key.substring(6)); 
                             if (id > maxId) {
                                 maxId = id;
                             }
@@ -207,7 +207,7 @@ public class CartActivity extends AppCompatActivity implements OnChangeQuantity 
                         }
                     }
                 }
-                lastOrderId = maxId; // Setelah loop, maxId adalah ID order tertinggi
+                lastOrderId = maxId; 
             }
 
             @Override

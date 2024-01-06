@@ -60,7 +60,7 @@ public class CheckoutActivity extends AppCompatActivity {
         final String CHANNEL_ID = "HEADS_UP_NOTIFICATION";
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Membuat channel notifikasi untuk Android Oreo dan lebih tinggi
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID, "Heads Up Notification", NotificationManager.IMPORTANCE_HIGH
@@ -70,7 +70,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         PendingIntent pendingIntent = createPendingIntent();
 
-        // Membuat notifikasi
+
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -78,15 +78,18 @@ public class CheckoutActivity extends AppCompatActivity {
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
-        // Menampilkan notifikasi
+
         notificationManager.notify(1, notificationBuilder.build());
     }
 
 
     private PendingIntent createPendingIntent() {
-        Intent intent = new Intent(this ,SuccessActivity.class);
+        Intent intent = new Intent(this, SuccessActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Menambahkan FLAG_IMMUTABLE untuk kompatibilitas dengan Android 12 dan yang lebih tinggi
+        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
+
 
 }

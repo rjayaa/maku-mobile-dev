@@ -1,4 +1,4 @@
-package com.project.maku_mobile_based.Activity;
+package com.project.maku_mobile_based.Service;
 
 import android.Manifest;
 import android.app.Notification;
@@ -15,7 +15,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.project.maku_mobile_based.R;
 
-public class Service extends FirebaseMessagingService {
+public class PushNotificationService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
